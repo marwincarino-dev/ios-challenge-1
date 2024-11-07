@@ -1,0 +1,34 @@
+{
+  "configurations" : [
+    {
+      "id" : "6B25272A-6C17-43A4-9772-7B2ECC69C7CF",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:iOSChallenge.xcodeproj",
+          "identifier" : "64B7688D2CDD89700063C588",
+          "name" : "iOSChallenge"
+        }
+      ]
+    },
+    "testExecutionOrdering" : "random",
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:iOSChallenge.xcodeproj",
+        "identifier" : "64B768A32CDD89710063C588",
+        "name" : "iOSChallengeTests"
+      }
+    }
+  ],
+  "version" : 1
+}

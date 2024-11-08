@@ -77,7 +77,7 @@ private extension LoadActivityFromRemoteUseCaseTests {
     
     func expect(
         _ sut: RemoteActivityLoader,
-        toCompleteWith expectedResult: Result<[Data], RemoteActivityLoader.Error>,
+        toCompleteWith expectedResult: Result<ActivityContainer, RemoteActivityLoader.Error>,
         when action: () -> Void,
         file: StaticString = #filePath,
         line: UInt = #line

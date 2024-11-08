@@ -10,15 +10,21 @@ import Foundation
 final class RemoteActivityLoader: ActivityLoader {
     private let url: URL
     private let client: HTTPClient
+    private let decoder: JSONDecoder
     
-    init(url: URL, client: HTTPClient) {
+    init(
+        url: URL,
+        client: HTTPClient,
+        decoder: JSONDecoder = .remoteActivityDecoder
+    ) {
         self.url = url
         self.client = client
+        self.decoder = decoder
     }
     
     func load(completion: @escaping (ActivityLoader.Result) -> Void) {
         client.request(from: url, completion: { [weak self] result in
-            guard let _ = self else { return }
+            guard let self = self else { return }
             
             switch result {
             case let .success((data, response)):
@@ -27,7 +33,12 @@ final class RemoteActivityLoader: ActivityLoader {
                     return
                 }
                 
-                completion(.success([data]))
+                do {
+                    let decodedData = try self.decoder.decode(ActivityContainer.self, from: data)
+                    completion(.success(decodedData))
+                } catch {
+                    completion(.failure(Error.invalidData))
+                }
                 
                 return
             case .failure(_):
@@ -47,3 +58,4 @@ extension RemoteActivityLoader {
 private extension RemoteActivityLoader {
     static let OK_200 = 200
 }
+

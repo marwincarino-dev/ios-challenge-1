@@ -38,6 +38,29 @@ final class LoadActivityFromRemoteUseCaseTests: XCTestCase {
         XCTAssertEqual(client.requestedURLs, [url, url])
     }
     
+    func test_load_returnsConnectivityErrorOnClientError() {
+        let (client, sut) = makeSUT(url: anyURL())
+        
+        let exp = expectation(description: "Expect for load completion")
+        
+        sut.load(completion: { result in
+            switch result {
+            case let .success(data):
+                XCTFail("Expecting to receive a failure with error")
+            case let .failure(receivedError as RemoteActivityLoader.Error):
+                XCTAssertEqual(receivedError, RemoteActivityLoader.Error.connectivity)
+            default:
+                XCTFail("Expecting to receive a failure with error")
+            }
+            
+            exp.fulfill()
+        })
+        
+        client.complete(with: anyError(), at: 0)
+        
+        waitForExpectations(timeout: 0.1)
+    }
+    
     func makeSUT(url: URL) -> (HTTPClientSpy, ActivityLoader) {
         let client = HTTPClientSpy()
         let sut = RemoteActivityLoader(url: url, client: client)
@@ -66,8 +89,32 @@ final class RemoteActivityLoader: ActivityLoader {
         client.request(from: url, completion: { [weak self] result in
             guard let _ = self else { return }
             
+            switch result {
+            case let .success((data, response)):
+                guard response.statusCode == RemoteActivityLoader.OK_200 else {
+                    completion(.failure(Error.invalidData))
+                    return
+                }
+                
+                completion(.success([data]))
+                
+                return
+            case .failure(_):
+                completion(.failure(Error.connectivity))
+            }
         })
     }
+}
+
+extension RemoteActivityLoader {
+    enum Error: Swift.Error {
+        case connectivity
+        case invalidData
+    }
+}
+
+private extension RemoteActivityLoader {
+    static let OK_200 = 200
 }
 
 protocol HTTPClient {
@@ -83,6 +130,14 @@ final class HTTPClientSpy: HTTPClient {
     func request(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) {
         messages.append((url, completion))
     }
+    
+    func complete(with error: Error, at index: Int, file: StaticString = #filePath, line: UInt = #line) {
+        guard messages.count > index else {
+            return XCTFail("Invalid Index: Unable to complete request")
+        }
+        
+        messages[index].completion(.failure(error))
+    }
 }
 
 extension HTTPClientSpy {
@@ -93,4 +148,8 @@ extension HTTPClientSpy {
 
 func anyURL() -> URL {
     URL(string: "https://any-url.com")!
+}
+
+func anyError() -> NSError {
+    NSError(domain: "Test", code: 1)
 }

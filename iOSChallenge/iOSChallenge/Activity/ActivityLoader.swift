@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ActivityLoader {
-    typealias Result = Swift.Result<[Data], RemoteActivityLoader.Error>
+    typealias Result = Swift.Result<[Data], Error>
     
     func load(completion: @escaping (ActivityLoader.Result) -> Void)
 }

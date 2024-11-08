@@ -8,6 +8,11 @@
 import XCTest
 @testable import iOSChallenge
 
+// TDD
+// Arrange > Act > Assert
+// Red > Green > Refactor
+// Triangulation
+
 final class LoadActivityFromRemoteUseCaseTests: XCTestCase {
     func test_init_doesNotRequestDataFromURL() {
         let (client, _) = makeSUT(url: anyURL())
@@ -72,7 +77,7 @@ private extension LoadActivityFromRemoteUseCaseTests {
     
     func expect(
         _ sut: RemoteActivityLoader,
-        toCompleteWith expectedResult: ActivityLoader.Result,
+        toCompleteWith expectedResult: Result<[Data], RemoteActivityLoader.Error>,
         when action: () -> Void,
         file: StaticString = #filePath,
         line: UInt = #line
@@ -89,7 +94,7 @@ private extension LoadActivityFromRemoteUseCaseTests {
                     line: line
                 )
                 
-            case let (.failure(receivedError), .failure(expectedError)):
+            case let (.failure(receivedError as RemoteActivityLoader.Error), .failure(expectedError)):
                 XCTAssertEqual(
                     receivedError,
                     expectedError,

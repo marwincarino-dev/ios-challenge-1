@@ -19,6 +19,15 @@ final class LoadActivityFromRemoteUseCaseTests: XCTestCase {
         XCTAssert(client.requestedURLs.isEmpty)
     }
     
+    func test_loadOnce_requestsDataFromURLOnce() {
+        let url = anyURL()
+        let (client, sut) = makeSUT(url: url)
+        
+        sut.load(completion: { _ in })
+        
+        XCTAssertEqual(client.requestedURLs, [url])
+    }
+    
     func makeSUT(url: URL) -> (HTTPClientSpy, ActivityLoader) {
         let client = HTTPClientSpy()
         let sut = RemoteActivityLoader(url: url, client: client)

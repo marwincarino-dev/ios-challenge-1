@@ -49,6 +49,21 @@ final class LoadActivityFromRemoteUseCaseTests: XCTestCase {
             }
         )
     }
+    
+    func test_load_returnsInvalidDataOnNon200HTTPResponseStatusCode() {
+        let (client, sut) = makeSUT(url: anyURL())
+        let invalidStatusCodes = [199, 201, 400, 500]
+        
+        invalidStatusCodes.enumerated().forEach { (index, statusCode) in
+            expect(
+                sut,
+                toCompleteWith: .failure(.invalidData),
+                when: {
+                    client.complete(with: statusCode, data: anyData([]), at: index)
+                }
+            )
+        }
+    }
 }
 
 private extension LoadActivityFromRemoteUseCaseTests {
@@ -176,6 +191,27 @@ final class HTTPClientSpy: HTTPClient {
         
         messages[index].completion(.failure(error))
     }
+    
+    func complete(
+        with statusCode: Int,
+        data: Data,
+        at index: Int,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        guard messages.count > index else {
+            return XCTFail("Invalid Index: Unable to complete request", file: file, line: line)
+        }
+        
+        let response = HTTPURLResponse(
+            url: requestedURLs[index],
+            statusCode: statusCode,
+            httpVersion: nil,
+            headerFields: nil
+        )!
+        
+        messages[index].completion(.success((data, response)))
+    }
 }
 
 extension HTTPClientSpy {
@@ -190,4 +226,9 @@ func anyURL() -> URL {
 
 func anyError() -> NSError {
     NSError(domain: "Test", code: 1)
+}
+
+func anyData(_ data: [[String: Any]]) -> Data {
+    let json = ["data": data]
+    return try! JSONSerialization.data(withJSONObject: json)
 }

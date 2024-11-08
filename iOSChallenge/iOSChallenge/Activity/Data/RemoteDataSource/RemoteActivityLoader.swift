@@ -34,8 +34,10 @@ final class RemoteActivityLoader: ActivityLoader {
                 }
                 
                 do {
-                    let decodedData = try self.decoder.decode(ActivityContainer.self, from: data)
-                    completion(.success(decodedData))
+                    let decodedData = try self.decoder.decode(RemoteActivityContainer.self, from: data)
+                    let mappedData = RemoteActivityMapper.map(decodedData)
+                    
+                    completion(.success(mappedData))
                 } catch {
                     completion(.failure(Error.invalidData))
                 }

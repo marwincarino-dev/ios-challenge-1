@@ -24,9 +24,10 @@ final class LocalActivityLoader: ActivityLoader {
         
         do {
             let data = try Data(contentsOf: url)
-            let decodedData = try decoder.decode(ActivityContainer.self, from: data)
+            let decodedData = try decoder.decode(LocalActivityContainer.self, from: data)
+            let mappedData = LocalActivityMapper.map(decodedData)
             
-            completion(.success(decodedData))
+            completion(.success(mappedData))
         } catch {
             completion(.failure(Error.invalidData))
         }

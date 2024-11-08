@@ -41,37 +41,70 @@ final class LoadActivityFromRemoteUseCaseTests: XCTestCase {
     func test_load_returnsConnectivityErrorOnClientError() {
         let (client, sut) = makeSUT(url: anyURL())
         
-        let exp = expectation(description: "Expect for load completion")
-        
-        sut.load(completion: { result in
-            switch result {
-            case let .success(data):
-                XCTFail("Expecting to receive a failure with error")
-            case let .failure(receivedError as RemoteActivityLoader.Error):
-                XCTAssertEqual(receivedError, RemoteActivityLoader.Error.connectivity)
-            default:
-                XCTFail("Expecting to receive a failure with error")
+        expect(
+            sut,
+            toCompleteWith: .failure(.connectivity),
+            when: {
+                client.complete(with: anyError(), at: 0)
             }
-            
-            exp.fulfill()
-        })
-        
-        client.complete(with: anyError(), at: 0)
-        
-        waitForExpectations(timeout: 0.1)
+        )
     }
-    
-    func makeSUT(url: URL) -> (HTTPClientSpy, ActivityLoader) {
+}
+
+private extension LoadActivityFromRemoteUseCaseTests {
+    func makeSUT(url: URL) -> (HTTPClientSpy, RemoteActivityLoader) {
         let client = HTTPClientSpy()
         let sut = RemoteActivityLoader(url: url, client: client)
         
         return (client, sut)
     }
-
+    
+    func expect(
+        _ sut: RemoteActivityLoader,
+        toCompleteWith expectedResult: ActivityLoader.Result,
+        when action: () -> Void,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        let exp = expectation(description: "Wait for load completion")
+        
+        sut.load { receivedResult in
+            switch (receivedResult, expectedResult) {
+            case let (.success(receivedData), .success(expectedData)):
+                XCTAssertEqual(
+                    receivedData,
+                    expectedData,
+                    file: file,
+                    line: line
+                )
+                
+            case let (.failure(receivedError), .failure(expectedError)):
+                XCTAssertEqual(
+                    receivedError,
+                    expectedError,
+                    file: file,
+                    line: line
+                )
+                
+            default:
+                XCTFail(
+                    "Expecting \(expectedResult) got \(receivedResult) instead",
+                    file: file,
+                    line: line
+                )
+            }
+            
+            exp.fulfill()
+        }
+        
+        action()
+        
+        waitForExpectations(timeout: 0.1)
+    }
 }
 
 protocol ActivityLoader {
-    typealias Result = Swift.Result<[Data], Error>
+    typealias Result = Swift.Result<[Data], RemoteActivityLoader.Error>
     
     func load(completion: @escaping (ActivityLoader.Result) -> Void)
 }
@@ -131,7 +164,12 @@ final class HTTPClientSpy: HTTPClient {
         messages.append((url, completion))
     }
     
-    func complete(with error: Error, at index: Int, file: StaticString = #filePath, line: UInt = #line) {
+    func complete(
+        with error: Error,
+        at index: Int,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
         guard messages.count > index else {
             return XCTFail("Invalid Index: Unable to complete request")
         }

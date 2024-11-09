@@ -8,16 +8,17 @@
 import Foundation
 
 final class CommonActivityContainerRepository: ActivityContainerRepository {
-    private let remote: ActivityLoader
-    private let local: ActivityLoader?
+    private let primary: ActivityLoader
+    private let secondary: ActivityLoader?
     
-    init(remote: ActivityLoader, local: ActivityLoader? = nil) {
-        self.remote = remote
-        self.local = local
+    init(primary: ActivityLoader, secondary: ActivityLoader? = nil) {
+        self.primary = primary
+        self.secondary = secondary
     }
 }
 
 extension CommonActivityContainerRepository {
+    // TO DO: - Add `retry` capability
     func load() async throws -> ActivityContainer {
         return try await load(using: primary, with: secondary)
     }
@@ -27,7 +28,7 @@ private extension CommonActivityContainerRepository {
     func load(using primary: ActivityLoader, with fallback: ActivityLoader? = nil) async throws -> ActivityContainer {
         return try await withCheckedThrowingContinuation({ continuation in
             primary.load(completion: { [weak self] result in
-                guard let self else { return }
+                guard let _ = self else { return }
                 
                 switch result {
                 case let .success(data):
@@ -43,15 +44,11 @@ private extension CommonActivityContainerRepository {
                                 continuation.resume(throwing: error)
                             }
                         })
+                    } else {
+                        continuation.resume(throwing: error)
                     }
-                    
-                    continuation.resume(throwing: error)
                 }
             })
         })
     }
-    
-    var primary: ActivityLoader { remote }
-    
-    var secondary: ActivityLoader? { local }
 }

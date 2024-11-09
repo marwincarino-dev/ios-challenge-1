@@ -17,7 +17,9 @@ final class RecapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
-    
+}
+
+extension RecapViewController {
     static func make() -> RecapViewController {
         return UIStoryboard.recap.instantiateViewController(ofType: RecapViewController.self)
     }

@@ -8,12 +8,21 @@
 import UIKit
 
 final class MainViewController: UIViewController {
-    private var pageViewController: UIPageViewController!
-    private var pageViewControllers: [UIViewController] = []
+    // MARK: - IBOutlets
     
-    @IBOutlet var pageContainerView: UIView!
+    @IBOutlet private var progressView: UIProgressView!
+    @IBOutlet private var closeButton: UIButton!
+    @IBOutlet private var backButton: UIButton!
+    @IBOutlet private var pageContainerView: UIView!
+    
+    // MARK: - Properties
     
     var viewModel: MainViewModel!
+    
+    private var pageViewController: UIPageViewController!
+    private var pageViewControllers: [UIViewController] = []
+    private var currentPageController: UIViewController?
+    private var currentPageIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +37,16 @@ final class MainViewController: UIViewController {
         
         loadData()
     }
+    
+    // MARK: - IBActions
+    
+    @IBAction private func onTapClose(_ sender: Any) {
+        showAlert(title: nil, message: "No implementation")
+    }
+    
+    @IBAction private func onTapBack(_ sender: Any) {
+        previousScreen()
+    }
 }
 
 private extension MainViewController {
@@ -36,6 +55,8 @@ private extension MainViewController {
             do {
                 try await viewModel.loadScreens()
                 setupPageScreens()
+                updateProgressView()
+                updateBackButton()
             } catch {
                 showAlert(title: "Error", message: error.localizedDescription)
             }
@@ -58,6 +79,11 @@ private extension MainViewController {
             if let multipleChoiceVM = screenVM as? MultipleChoiceViewModel {
                 let controller = MultipleChoiceViewController.make()
                 controller.viewModel = multipleChoiceVM
+                controller.onSubmit = { [weak self] in
+                    guard let self else { return }
+                    
+                    self.nextScreen()
+                }
                 
                 pageViewControllers.append(controller)
             } else if let recapVM = screenVM as? RecapViewModel {
@@ -81,43 +107,69 @@ private extension MainViewController {
         pageContainerView.addSubview(pageViewController.view)
         pageViewController.didMove(toParent: self)
         
-        pageViewController.dataSource = self
-        pageViewController.delegate = self
+        let firstIndex = 0
+        let firstController = pageViewControllers[firstIndex]
         
-        if let firstPage = pageViewControllers.first {
-            pageViewController.setViewControllers(
-                [firstPage],
-                direction: .forward,
-                animated: true
-            )
-        }
+        updatePageStates(
+            viewController: firstController,
+            index: firstIndex,
+            direction: .forward
+        )
+    }
+    
+    func nextScreen() {
+        guard let currentPageController,
+              let currentIndex = pageViewControllers.firstIndex(of: currentPageController),
+              (currentIndex + 1) < pageViewControllers.count else { return }
+        
+        let nextIndex = currentIndex + 1
+        let nextController = pageViewControllers[nextIndex]
+        
+        updatePageStates(
+            viewController: nextController,
+            index: nextIndex,
+            direction: .forward
+        )
+    }
+    
+    func previousScreen() {
+        guard let currentPageController,
+              let currentIndex = pageViewControllers.firstIndex(of: currentPageController),
+              (currentIndex - 1) >= 0 else { return }
+        
+        let previousIndex = currentIndex - 1
+        let previousController = pageViewControllers[previousIndex]
+        
+        updatePageStates(
+            viewController: previousController,
+            index: previousIndex,
+            direction: .reverse
+        )
+    }
+    
+    func updatePageStates(viewController: UIViewController, index: Int, direction: UIPageViewController.NavigationDirection) {
+        currentPageController = viewController
+        currentPageIndex = index
+        
+        pageViewController.setViewControllers(
+            [currentPageController!],
+            direction: direction,
+            animated: true
+        )
+        
+        updateProgressView()
+        updateBackButton()
     }
 }
 
-extension MainViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-    func pageViewController(
-        _ pageViewController: UIPageViewController,
-        viewControllerBefore viewController: UIViewController
-    ) -> UIViewController? {
-        
-        guard let currentIndex = pageViewControllers.firstIndex(of: viewController),
-              currentIndex > 0 else {
-            return nil
-        }
-        
-        return pageViewControllers[currentIndex - 1]
+private extension MainViewController {
+    func updateProgressView() {
+        let currentProgress = Float(Float(currentPageIndex) / Float(pageViewControllers.count))
+        progressView.setProgress(currentProgress, animated: true)
     }
     
-    func pageViewController(
-        _ pageViewController: UIPageViewController,
-        viewControllerAfter viewController: UIViewController
-    ) -> UIViewController? {
-        guard let currentIndex = pageViewControllers.firstIndex(of: viewController),
-              currentIndex < pageViewControllers.count - 1 else {
-            return nil
-        }
-        
-        return pageViewControllers[currentIndex + 1]
+    func updateBackButton() {
+        backButton.isHidden = currentPageIndex <= 0
     }
 }
 

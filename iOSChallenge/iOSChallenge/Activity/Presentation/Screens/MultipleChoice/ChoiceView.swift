@@ -40,6 +40,10 @@ final class ChoiceView: UIView {
         textLabel.text = text
     }
     
+    func resetSelection() {
+        isSelected = false
+    }
+    
     // MARK: - IBActions
     
     @IBAction
@@ -70,7 +74,7 @@ private extension ChoiceView {
     }
     
     var selectedColor: UIColor {
-        UIColor.systemIndigo
+        UIColor.purple5
     }
 }
 

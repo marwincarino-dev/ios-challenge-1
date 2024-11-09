@@ -14,16 +14,15 @@ final class MultipleChoiceViewController: UIViewController {
     @IBOutlet private var selectionTypeLabel: UILabel!
     @IBOutlet private var choicesStackView: UIStackView!
     @IBOutlet private var continueButton: UIButton!
-    
-    @IBAction
-    private func onTapContinue(_ sender: Any) {
-        onSubmit?()
-    }
-    
+   
     // MARK: - Properties
     
     var onSubmit: (() -> Void)?
     var viewModel: MultipleChoiceViewModel!
+    
+    private var choiceViews: [ChoiceView] = []
+    
+    private let activityIndicator = UIActivityIndicatorView(style: .large)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +30,26 @@ final class MultipleChoiceViewController: UIViewController {
         setup()
     }
     
+    // MARK: - IBActions
+    
+    @IBAction
+    private func onTapContinue(_ sender: Any) {
+        submitWithSimulatedLoading()
+    }
+}
+
+private extension MultipleChoiceViewController {
     func setup() {
         questionLabel.text = viewModel.question
         
         selectionTypeLabel.isHidden = !viewModel.allowsMultipleChoices
         
         continueButton.isHidden = !viewModel.allowsMultipleChoices
-        updateContinueButtonState()
+        updateContinueButton()
         
         setupChoices()
+        
+        setupActivityIndicator()
     }
     
     func setupChoices() {
@@ -54,6 +64,8 @@ final class MultipleChoiceViewController: UIViewController {
         view.configure(emoji: choice.emoji, text: choice.text)
         view.onTap = handleChoiceOnTap(choice: choice)
         
+        choiceViews.append(view)
+        
         NSLayoutConstraint.activate([
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 54.0)
         ])
@@ -61,10 +73,63 @@ final class MultipleChoiceViewController: UIViewController {
         return view
     }
     
-    func updateContinueButtonState() {
+    func updateContinueButton() {
         guard !continueButton.isHidden else { return }
         
         continueButton.isEnabled = !viewModel.selectedChoices.isEmpty
+    }
+    
+    func clearChoiceViewSelection() {
+        choiceViews.forEach { view in
+            view.resetSelection()
+        }
+    }
+    
+    func submit() {
+        onSubmit?()
+        
+        if shouldClearSelection {
+            viewModel.clearSelectedChoices()
+            clearChoiceViewSelection()
+        }
+    }
+    
+    func setupActivityIndicator() {
+        activityIndicator.style = .large
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+    }
+    
+    func showActivityIndicator() {
+        
+        view.addSubview(activityIndicator)
+        view.bringSubviewToFront(activityIndicator)
+
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+
+        activityIndicator.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        activityIndicator.stopAnimating()
+        activityIndicator.removeFromSuperview()
+    }
+    
+    func submitWithSimulatedLoading() {
+        Task { @MainActor in
+            view.isUserInteractionEnabled = false
+            showActivityIndicator()
+            
+            try await Task.sleep(nanoseconds: 1_000_000_000)
+            
+            hideActivityIndicator()
+            view.isUserInteractionEnabled = true
+            
+            submit()
+        }
     }
 }
 
@@ -74,12 +139,18 @@ private extension MultipleChoiceViewController {
             guard let self else { return }
             
             self.viewModel.select(choice: choice)
-            self.updateContinueButtonState()
+            self.updateContinueButton()
             
             if !self.viewModel.allowsMultipleChoices {
-                self.onSubmit?()
+                submitWithSimulatedLoading()
             }
         }
+    }
+}
+
+private extension MultipleChoiceViewController {
+    var shouldClearSelection: Bool {
+        !viewModel.allowsMultipleChoices
     }
 }
 

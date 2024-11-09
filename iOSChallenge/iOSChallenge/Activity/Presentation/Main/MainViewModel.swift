@@ -34,7 +34,7 @@ extension CommonMainViewModel {
                 switch screen.type {
                 case .multipleChoiceModuleScreen:
                     let choices = screen.choices?.compactMap({
-                        (id: $0.id, text: $0.text, emoji: $0.emoji)
+                        MultipleChoiceViewModel.Choice(id: $0.id, text: $0.text, emoji: $0.emoji)
                     })
                     
                     return  MultipleChoiceViewModel(

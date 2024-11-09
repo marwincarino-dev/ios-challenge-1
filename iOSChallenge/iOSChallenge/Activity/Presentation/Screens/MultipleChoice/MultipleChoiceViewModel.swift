@@ -34,6 +34,10 @@ final class MultipleChoiceViewModel: ScreenViewModel {
             selectedChoices.insert(choice)
         }
     }
+    
+    func clearSelectedChoices() {
+        selectedChoices.removeAll()
+    }
 }
 
 extension MultipleChoiceViewModel {

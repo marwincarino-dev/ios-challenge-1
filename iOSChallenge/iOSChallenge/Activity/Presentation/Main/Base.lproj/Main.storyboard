@@ -19,8 +19,58 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="caI-4K-mhP">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gs-rC-Lr4" userLabel="Progress View Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="4"/>
+                                        <subviews>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="svx-p0-w0v">
+                                                <rect key="frame" x="16" y="0.0" width="361" height="4"/>
+                                            </progressView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="svx-p0-w0v" secondAttribute="trailing" constant="16" id="1rO-NY-TXu"/>
+                                            <constraint firstItem="svx-p0-w0v" firstAttribute="top" secondItem="2gs-rC-Lr4" secondAttribute="top" id="9Lo-mS-irh"/>
+                                            <constraint firstAttribute="bottom" secondItem="svx-p0-w0v" secondAttribute="bottom" id="QCl-a6-DOc"/>
+                                            <constraint firstItem="svx-p0-w0v" firstAttribute="leading" secondItem="2gs-rC-Lr4" secondAttribute="leading" constant="16" id="oyZ-TR-fMZ"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05x-eo-D9R">
+                                        <rect key="frame" x="0.0" y="4" width="393" height="48"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNr-Ve-irp">
+                                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="qNr-Ve-irp" secondAttribute="height" multiplier="1:1" id="GxE-Kp-LcX"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="back"/>
+                                                <connections>
+                                                    <action selector="onTapBack:" destination="M0Q-44-fgJ" eventType="touchUpInside" id="L0L-UE-gvs"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oWr-V2-9pa">
+                                                <rect key="frame" x="48" y="0.0" width="297" height="48"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJM-xu-PEe">
+                                                <rect key="frame" x="345" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="EJM-xu-PEe" secondAttribute="height" multiplier="1:1" id="MsG-7b-YtY"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="close"/>
+                                                <connections>
+                                                    <action selector="onTapClose:" destination="M0Q-44-fgJ" eventType="touchUpInside" id="1UN-O5-CDq"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="sSq-aL-bhv"/>
+                                        </constraints>
+                                    </stackView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ib-tZ-cYC">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
+                                        <rect key="frame" x="0.0" y="52" width="393" height="707"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </containerView>
                                 </subviews>
@@ -37,7 +87,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="7U8-em-vsg"/>
                     <connections>
+                        <outlet property="backButton" destination="qNr-Ve-irp" id="IS8-9i-EXD"/>
+                        <outlet property="closeButton" destination="EJM-xu-PEe" id="VAz-R8-Krg"/>
                         <outlet property="pageContainerView" destination="0ib-tZ-cYC" id="66P-Fw-zLZ"/>
+                        <outlet property="progressView" destination="svx-p0-w0v" id="by7-84-zRv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Bv-kL-Nk6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -46,6 +99,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="back" width="24" height="24"/>
+        <image name="close" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

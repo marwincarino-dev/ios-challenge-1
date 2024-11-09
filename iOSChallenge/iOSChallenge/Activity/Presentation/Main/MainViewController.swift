@@ -79,16 +79,13 @@ private extension MainViewController {
             if let multipleChoiceVM = screenVM as? MultipleChoiceViewModel {
                 let controller = MultipleChoiceViewController.make()
                 controller.viewModel = multipleChoiceVM
-                controller.onSubmit = { [weak self] in
-                    guard let self else { return }
-                    
-                    self.nextScreen()
-                }
+                controller.onSubmit = handleScreenOnSubmit()
                 
                 pageViewControllers.append(controller)
             } else if let recapVM = screenVM as? RecapViewModel {
                 let controller = RecapViewController.make()
                 controller.viewModel = recapVM
+                controller.onSubmit = handleScreenOnSubmit()
                 
                 pageViewControllers.append(controller)
             }
@@ -173,8 +170,12 @@ private extension MainViewController {
     }
 }
 
-extension MainViewController {
-    static func make() -> MainViewController {
-        return UIStoryboard.main.instantiateViewController(ofType: MainViewController.self)
+private extension MainViewController {
+    func handleScreenOnSubmit() -> (() -> Void) {
+        return { [weak self] in
+            guard let self else { return }
+            
+            self.nextScreen()
+        }
     }
 }

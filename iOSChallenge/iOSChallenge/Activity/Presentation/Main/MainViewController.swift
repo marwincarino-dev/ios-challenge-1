@@ -17,8 +17,6 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupPageContent()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +34,8 @@ private extension MainViewController {
     func loadData() {
         Task {
             do {
-                try await viewModel.loadActivityContainer()
+                try await viewModel.loadScreens()
+                setupPageScreens()
             } catch {
                 showAlert(title: "Error", message: error.localizedDescription)
             }
@@ -44,26 +43,30 @@ private extension MainViewController {
     }
 }
 
-private extension MainViewController {
-    var item: ActivityContainer? {
-        viewModel.item
-    }
-}
-
-// MARK: - Page
+// MARK: - Page Screen
 
 private extension MainViewController {
-    func setupPageContent() {
+    func setupPageScreens() {
         setupPageViewControllers()
         setupPageViewController()
     }
     
     func setupPageViewControllers() {
-        pageViewControllers = [
-            MultipleChoiceViewController.make(),
-            RecapViewController.make(),
-            MultipleChoiceViewController.make(),
-        ]
+        pageViewControllers = []
+        
+        viewModel.screenViewModels.forEach { screenVM in
+            if let multipleChoiceVM = screenVM as? MultipleChoiceViewModel {
+                let controller = MultipleChoiceViewController.make()
+                controller.viewModel = multipleChoiceVM
+                
+                pageViewControllers.append(controller)
+            } else if let recapVM = screenVM as? RecapViewModel {
+                let controller = RecapViewController.make()
+                controller.viewModel = recapVM
+                
+                pageViewControllers.append(controller)
+            }
+        }
     }
     
     func setupPageViewController() {

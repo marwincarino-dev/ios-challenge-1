@@ -31,7 +31,7 @@ private extension LocalActivityContainer.Activity.Screen {
     var presentable: ActivityContainer.Activity.Screen {
         .init(
             id: id,
-            type: type,
+            type: .init(rawValue: type)!,
             question: question,
             multipleChoicesAllowed: multipleChoicesAllowed,
             choices: choices?.compactMap({ $0.presentable }),

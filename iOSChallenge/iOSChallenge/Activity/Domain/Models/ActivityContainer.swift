@@ -32,7 +32,7 @@ extension ActivityContainer {
 extension ActivityContainer.Activity {
     struct Screen: Codable, Equatable {
         let id: String
-        let type: String
+        let type: `Type`
         
         let question: String?
         let multipleChoicesAllowed: Bool?
@@ -42,6 +42,11 @@ extension ActivityContainer.Activity {
         let body: String?
         let answers: [Answer]?
         let correctAnswer: String?
+    }
+    
+    enum `Type`: String, Codable {
+        case multipleChoiceModuleScreen
+        case recapModuleScreen
     }
 }
 

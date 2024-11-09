@@ -73,18 +73,6 @@ private extension MultipleChoiceViewController {
         return view
     }
     
-    func updateContinueButton() {
-        guard !continueButton.isHidden else { return }
-        
-        continueButton.isEnabled = !viewModel.selectedChoices.isEmpty
-    }
-    
-    func clearChoiceViewSelection() {
-        choiceViews.forEach { view in
-            view.resetSelection()
-        }
-    }
-    
     func submit() {
         onSubmit?()
         
@@ -92,30 +80,6 @@ private extension MultipleChoiceViewController {
             viewModel.clearSelectedChoices()
             clearChoiceViewSelection()
         }
-    }
-    
-    func setupActivityIndicator() {
-        activityIndicator.style = .large
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
-    }
-    
-    func showActivityIndicator() {
-        
-        view.addSubview(activityIndicator)
-        view.bringSubviewToFront(activityIndicator)
-
-        NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
-
-        activityIndicator.startAnimating()
-    }
-    
-    func hideActivityIndicator() {
-        activityIndicator.stopAnimating()
-        activityIndicator.removeFromSuperview()
     }
     
     func submitWithSimulatedLoading() {
@@ -130,6 +94,41 @@ private extension MultipleChoiceViewController {
             
             submit()
         }
+    }
+    
+    func clearChoiceViewSelection() {
+        choiceViews.forEach { view in
+            view.resetSelection()
+        }
+    }
+    
+    func updateContinueButton() {
+        guard !continueButton.isHidden else { return }
+        
+        continueButton.isEnabled = !viewModel.selectedChoices.isEmpty
+    }
+    
+    func setupActivityIndicator() {
+        activityIndicator.style = .large
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+    }
+    
+    func showActivityIndicator() {
+        view.addSubview(activityIndicator)
+        view.bringSubviewToFront(activityIndicator)
+
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+
+        activityIndicator.startAnimating()
+    }
+    
+    func hideActivityIndicator() {
+        activityIndicator.stopAnimating()
+        activityIndicator.removeFromSuperview()
     }
 }
 
@@ -151,11 +150,5 @@ private extension MultipleChoiceViewController {
 private extension MultipleChoiceViewController {
     var shouldClearSelection: Bool {
         !viewModel.allowsMultipleChoices
-    }
-}
-
-extension MultipleChoiceViewController {
-    static func make() -> MultipleChoiceViewController {
-        return UIStoryboard.multipleChoice.instantiateViewController(ofType: MultipleChoiceViewController.self)
     }
 }

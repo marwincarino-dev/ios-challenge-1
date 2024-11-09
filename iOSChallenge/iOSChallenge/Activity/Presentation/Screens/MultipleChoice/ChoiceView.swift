@@ -70,7 +70,7 @@ private extension ChoiceView {
     }
     
     var selectedColor: UIColor {
-        UIColor.purple
+        UIColor.systemIndigo
     }
 }
 

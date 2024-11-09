@@ -30,8 +30,7 @@ final class ChoiceView: UIView {
         layer.cornerRadius = 10.0
         layer.borderWidth = 1.0
         
-        isSelected = false
-        
+        resetSelection()
         setupTapGestureRecognizer()
     }
     

@@ -161,7 +161,7 @@ private extension MainViewController {
 
 private extension MainViewController {
     func updateProgressView() {
-        let currentProgress = Float(Float(currentPageIndex) / Float(pageViewControllers.count))
+        let currentProgress = Float(Float(currentPageIndex) / Float(pageViewControllers.count - 1))
         progressView.setProgress(currentProgress, animated: true)
     }
     

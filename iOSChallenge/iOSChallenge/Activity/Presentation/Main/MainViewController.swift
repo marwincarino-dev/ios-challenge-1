@@ -13,6 +13,8 @@ final class MainViewController: UIViewController {
     
     @IBOutlet var pageContainerView: UIView!
     
+    var viewModel: MainViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,7 +24,33 @@ final class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        loadData()
+    }
 }
+
+private extension MainViewController {
+    func loadData() {
+        Task {
+            do {
+                try await viewModel.loadActivityContainer()
+            } catch {
+                showAlert(title: "Error", message: error.localizedDescription)
+            }
+        }
+    }
+}
+
+private extension MainViewController {
+    var item: ActivityContainer? {
+        viewModel.item
+    }
+}
+
+// MARK: - Page
 
 private extension MainViewController {
     func setupPageContent() {
@@ -87,5 +115,11 @@ extension MainViewController: UIPageViewControllerDataSource, UIPageViewControll
         }
         
         return pageViewControllers[currentIndex + 1]
+    }
+}
+
+extension MainViewController {
+    static func make() -> MainViewController {
+        return UIStoryboard.main.instantiateViewController(ofType: MainViewController.self)
     }
 }

@@ -12,6 +12,14 @@ extension UIStoryboard {
         UIStoryboard(name: "Main", bundle: nil)
     }
     
+    static var multipleChoice: UIStoryboard {
+        UIStoryboard(name: "MultipleChoice", bundle: nil)
+    }
+    
+    static var recap: UIStoryboard {
+        UIStoryboard(name: "Recap", bundle: nil)
+    }
+    
     func instantiateViewController<T: UIViewController>(ofType type: T.Type) -> T {
         let storyboardId = String(describing: type)
         

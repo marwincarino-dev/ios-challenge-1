@@ -17,6 +17,6 @@ final class RecapViewController: UIViewController {
     }
     
     static func make() -> RecapViewController {
-        return UIStoryboard.main.instantiateViewController(ofType: RecapViewController.self)
+        return UIStoryboard.recap.instantiateViewController(ofType: RecapViewController.self)
     }
 }

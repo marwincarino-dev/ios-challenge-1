@@ -17,7 +17,7 @@ final class MultipleChoiceViewController: UIViewController {
     }
     
     static func make() -> MultipleChoiceViewController {
-        return UIStoryboard.main.instantiateViewController(ofType: MultipleChoiceViewController.self)
+        return UIStoryboard.multipleChoice.instantiateViewController(ofType: MultipleChoiceViewController.self)
     }
 }
 

@@ -117,7 +117,12 @@ private extension MainViewController {
     func nextScreen() {
         guard let currentPageController,
               let currentIndex = pageViewControllers.firstIndex(of: currentPageController),
-              (currentIndex + 1) < pageViewControllers.count else { return }
+              (currentIndex + 1) < pageViewControllers.count else {
+            
+            showAlert(title: nil, message: "Thank you for completing the questionnaire ☺️")
+            
+            return
+        }
         
         let nextIndex = currentIndex + 1
         let nextController = pageViewControllers[nextIndex]

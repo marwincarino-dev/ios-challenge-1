@@ -18,4 +18,9 @@ extension UINib {
         
         return view
     }
+    
+    static func instantiate<T: UIView>(ofType type: T.Type) -> UINib {
+        let nibName = String(describing: type)
+        return UINib(nibName: nibName, bundle: nil)
+    }
 }

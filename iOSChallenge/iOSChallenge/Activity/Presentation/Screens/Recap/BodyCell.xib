@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="AnswerCell" reuseIdentifier="BodyCell" id="5aJ-zp-ZcC" customClass="BodyCell" customModule="iOSChallenge" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="359" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Jdg-0d-KnY">
+                <rect key="frame" x="0.0" y="0.0" width="359" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Label" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p7n-c0-6hA">
+                        <rect key="frame" x="0.0" y="0.0" width="359" height="50"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <constraints>
+                    <constraint firstItem="p7n-c0-6hA" firstAttribute="top" secondItem="Jdg-0d-KnY" secondAttribute="top" id="EzX-4q-RRb"/>
+                    <constraint firstItem="p7n-c0-6hA" firstAttribute="leading" secondItem="Jdg-0d-KnY" secondAttribute="leading" id="FVT-DP-pCk"/>
+                    <constraint firstAttribute="bottom" secondItem="p7n-c0-6hA" secondAttribute="bottom" id="pRy-ME-GhP"/>
+                    <constraint firstAttribute="trailing" secondItem="p7n-c0-6hA" secondAttribute="trailing" id="pdK-cK-XNc"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="359" height="50"/>
+            <connections>
+                <outlet property="textView" destination="p7n-c0-6hA" id="EQ6-73-g3w"/>
+            </connections>
+            <point key="canvasLocation" x="-301.52671755725191" y="-61.267605633802823"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

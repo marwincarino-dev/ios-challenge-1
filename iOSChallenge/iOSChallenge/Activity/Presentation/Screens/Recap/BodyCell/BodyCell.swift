@@ -9,9 +9,7 @@ import Foundation
 import UIKit
 
 class BodyCell: UICollectionViewCell  {
-    static var reuseIdentifier: String { String(describing: self)  }
-    
-    @IBOutlet var textView: UITextView!
+    @IBOutlet private var textView: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,10 +20,28 @@ class BodyCell: UICollectionViewCell  {
         
         textView.text = nil
     }
+}
+
+extension BodyCell {
+    func configure(with body: String) {
+        textView.text = body
+    }
     
+    func configure(with body: NSAttributedString) {
+        textView.attributedText = body
+    }
     
+    var text: String? {
+        textView.text
+    }
+}
+
+extension BodyCell {
+    static var reuseIdentifier: String { String(describing: self)  }
+}
+
+extension BodyCell {
     static func nib() -> UINib {
         return UINib.instantiate(ofType: BodyCell.self)
     }
 }
-

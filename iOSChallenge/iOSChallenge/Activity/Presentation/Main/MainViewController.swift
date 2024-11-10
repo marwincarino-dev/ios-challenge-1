@@ -120,6 +120,7 @@ private extension MainViewController {
               (currentIndex + 1) < pageViewControllers.count else {
             
             showAlert(title: nil, message: "Thank you for completing the questionnaire ☺️")
+            restart()
             
             return
         }
@@ -161,6 +162,10 @@ private extension MainViewController {
         
         updateProgressView()
         updateBackButton()
+    }
+    
+    func restart() {
+        loadData()
     }
 }
 

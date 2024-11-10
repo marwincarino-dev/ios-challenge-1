@@ -28,7 +28,7 @@ final class ChoiceView: UIView {
         super.awakeFromNib()
         
         layer.cornerRadius = 10.0
-        layer.borderWidth = 1.0
+        layer.borderWidth = 0.5
         
         resetSelection()
         setupTapGestureRecognizer()

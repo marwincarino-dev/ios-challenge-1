@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="0hX-cr-BtO">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" id="M0Q-44-fgJ" customClass="MainViewController" customModule="iOSChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qdu-dz-ZOd">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="caI-4K-mhP">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gs-rC-Lr4" userLabel="Progress View Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="4"/>
+                                        <subviews>
+                                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="svx-p0-w0v">
+                                                <rect key="frame" x="16" y="0.0" width="361" height="4"/>
+                                                <color key="progressTintColor" name="Purple 5"/>
+                                            </progressView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="svx-p0-w0v" secondAttribute="trailing" constant="16" id="1rO-NY-TXu"/>
+                                            <constraint firstItem="svx-p0-w0v" firstAttribute="top" secondItem="2gs-rC-Lr4" secondAttribute="top" id="9Lo-mS-irh"/>
+                                            <constraint firstAttribute="bottom" secondItem="svx-p0-w0v" secondAttribute="bottom" id="QCl-a6-DOc"/>
+                                            <constraint firstItem="svx-p0-w0v" firstAttribute="leading" secondItem="2gs-rC-Lr4" secondAttribute="leading" constant="16" id="oyZ-TR-fMZ"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="05x-eo-D9R">
+                                        <rect key="frame" x="0.0" y="4" width="393" height="48"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNr-Ve-irp">
+                                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="qNr-Ve-irp" secondAttribute="height" multiplier="1:1" id="GxE-Kp-LcX"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="back"/>
+                                                <connections>
+                                                    <action selector="onTapBack:" destination="M0Q-44-fgJ" eventType="touchUpInside" id="L0L-UE-gvs"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oWr-V2-9pa">
+                                                <rect key="frame" x="48" y="0.0" width="297" height="48"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJM-xu-PEe">
+                                                <rect key="frame" x="345" y="0.0" width="48" height="48"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="EJM-xu-PEe" secondAttribute="height" multiplier="1:1" id="MsG-7b-YtY"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="close"/>
+                                                <connections>
+                                                    <action selector="onTapClose:" destination="M0Q-44-fgJ" eventType="touchUpInside" id="1UN-O5-CDq"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="sSq-aL-bhv"/>
+                                        </constraints>
+                                    </stackView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ib-tZ-cYC">
+                                        <rect key="frame" x="0.0" y="52" width="393" height="707"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </containerView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="K28-eZ-bIL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="K28-eZ-bIL" firstAttribute="trailing" secondItem="caI-4K-mhP" secondAttribute="trailing" id="0dl-mL-63V"/>
+                            <constraint firstItem="caI-4K-mhP" firstAttribute="leading" secondItem="K28-eZ-bIL" secondAttribute="leading" id="h6t-D5-Epm"/>
+                            <constraint firstItem="caI-4K-mhP" firstAttribute="top" secondItem="K28-eZ-bIL" secondAttribute="top" id="nkZ-41-5W8"/>
+                            <constraint firstItem="K28-eZ-bIL" firstAttribute="bottom" secondItem="caI-4K-mhP" secondAttribute="bottom" id="riy-53-3u7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="7U8-em-vsg"/>
+                    <connections>
+                        <outlet property="backButton" destination="qNr-Ve-irp" id="IS8-9i-EXD"/>
+                        <outlet property="closeButton" destination="EJM-xu-PEe" id="VAz-R8-Krg"/>
+                        <outlet property="pageContainerView" destination="0ib-tZ-cYC" id="66P-Fw-zLZ"/>
+                        <outlet property="progressView" destination="svx-p0-w0v" id="by7-84-zRv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Bv-kL-Nk6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2372" y="563"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="24" height="24"/>
+        <image name="close" width="24" height="24"/>
+        <namedColor name="Purple 5">
+            <color red="0.39215686274509803" green="0.25882352941176467" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

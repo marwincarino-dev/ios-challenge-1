@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Multiple Choice View Controller-->
+        <scene sceneID="jgD-mU-iGx">
+            <objects>
+                <viewController storyboardIdentifier="MultipleChoiceViewController" id="tHH-sy-HlU" customClass="MultipleChoiceViewController" customModule="iOSChallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JlL-RX-1cs">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="l4z-29-xok">
+                                <rect key="frame" x="16" y="59" width="361" height="759"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Spf-QD-rPM" userLabel="Question Container">
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="651"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZIq-pd-270">
+                                                <rect key="frame" x="0.0" y="295.33333333333337" width="361" height="60.333333333333314"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label Label Label Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jEe-fW-e84">
+                                                        <rect key="frame" x="0.0" y="0.0" width="361" height="42.333333333333336"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select all that apply" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k15-b4-Nue">
+                                                        <rect key="frame" x="0.0" y="42.333333333333371" width="361" height="18"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="ZIq-pd-270" firstAttribute="centerY" secondItem="Spf-QD-rPM" secondAttribute="centerY" id="61G-cD-GPJ"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZIq-pd-270" secondAttribute="bottom" id="EhM-L2-TaO"/>
+                                            <constraint firstAttribute="trailing" secondItem="ZIq-pd-270" secondAttribute="trailing" id="Fti-yP-i4R"/>
+                                            <constraint firstItem="ZIq-pd-270" firstAttribute="leading" secondItem="Spf-QD-rPM" secondAttribute="leading" id="G8a-Hq-OTc"/>
+                                            <constraint firstItem="ZIq-pd-270" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Spf-QD-rPM" secondAttribute="top" id="QBo-W0-5ZB"/>
+                                        </constraints>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="haE-i3-SeW">
+                                        <rect key="frame" x="0.0" y="663" width="361" height="30"/>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Kr-Qb-SW6">
+                                        <rect key="frame" x="0.0" y="705" width="361" height="54"/>
+                                        <color key="backgroundColor" name="Purple 5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="54" id="Dwk-Vg-dlW"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Continue">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleHeadline"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onTapContinue:" destination="tHH-sy-HlU" eventType="touchUpInside" id="Ydb-DG-Ytt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="URU-jQ-hEr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="l4z-29-xok" firstAttribute="top" secondItem="URU-jQ-hEr" secondAttribute="top" id="785-cZ-IPQ"/>
+                            <constraint firstItem="l4z-29-xok" firstAttribute="leading" secondItem="URU-jQ-hEr" secondAttribute="leading" constant="16" id="gdN-pH-x9N"/>
+                            <constraint firstItem="URU-jQ-hEr" firstAttribute="trailing" secondItem="l4z-29-xok" secondAttribute="trailing" constant="16" id="qqx-AZ-aQf"/>
+                            <constraint firstItem="URU-jQ-hEr" firstAttribute="bottom" secondItem="l4z-29-xok" secondAttribute="bottom" id="uMX-WB-QXW"/>
+                        </constraints>
+                    </view>
+                    <size key="freeformSize" width="393" height="852"/>
+                    <connections>
+                        <outlet property="choicesStackView" destination="haE-i3-SeW" id="9jC-68-peV"/>
+                        <outlet property="continueButton" destination="0Kr-Qb-SW6" id="WOW-DP-wmd"/>
+                        <outlet property="questionLabel" destination="jEe-fW-e84" id="kfz-cn-G1b"/>
+                        <outlet property="selectionTypeLabel" destination="k15-b4-Nue" id="MhD-qW-HSc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YoA-se-KSM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3673" y="1004"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="Purple 5">
+            <color red="0.39215686274509803" green="0.25882352941176467" blue="0.93725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

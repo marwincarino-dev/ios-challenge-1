@@ -259,6 +259,8 @@ extension RecapViewController: UICollectionViewDragDelegate {
 
 extension RecapViewController: UICollectionViewDropDelegate {
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard collectionView == bodyCollectionView else { return }
+        
         coordinator.session.loadObjects(ofClass: NSString.self) { items in
             guard let draggedText = items.first as? String else { return }
             self.insertTextIntoBlank(draggedText)

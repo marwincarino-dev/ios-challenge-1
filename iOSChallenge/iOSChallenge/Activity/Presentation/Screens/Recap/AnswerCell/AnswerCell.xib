@@ -17,9 +17,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="359" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cDG-jz-FNH">
+                        <rect key="frame" x="4" y="4" width="351" height="42"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUV-X6-P1W">
                         <rect key="frame" x="16" y="0.0" width="327" height="50"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -28,12 +32,17 @@
                 <constraints>
                     <constraint firstItem="vUV-X6-P1W" firstAttribute="leading" secondItem="GFZ-lU-tht" secondAttribute="leading" constant="16" id="7RI-Zb-fjN"/>
                     <constraint firstAttribute="trailing" secondItem="vUV-X6-P1W" secondAttribute="trailing" constant="16" id="C7u-fk-TLf"/>
+                    <constraint firstAttribute="bottom" secondItem="cDG-jz-FNH" secondAttribute="bottom" constant="4" id="Gfi-07-CVO"/>
+                    <constraint firstAttribute="trailing" secondItem="cDG-jz-FNH" secondAttribute="trailing" constant="4" id="Lhi-wZ-hyZ"/>
+                    <constraint firstItem="cDG-jz-FNH" firstAttribute="leading" secondItem="GFZ-lU-tht" secondAttribute="leading" constant="4" id="ekY-xY-mS5"/>
+                    <constraint firstItem="cDG-jz-FNH" firstAttribute="top" secondItem="GFZ-lU-tht" secondAttribute="top" constant="4" id="jbB-Z1-qgh"/>
                     <constraint firstAttribute="bottom" secondItem="vUV-X6-P1W" secondAttribute="bottom" id="nfp-6Y-Rji"/>
                     <constraint firstItem="vUV-X6-P1W" firstAttribute="top" secondItem="GFZ-lU-tht" secondAttribute="top" id="xmd-6h-PzC"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="359" height="50"/>
             <connections>
+                <outlet property="containerView" destination="cDG-jz-FNH" id="5J9-5Q-OfN"/>
                 <outlet property="label" destination="vUV-X6-P1W" id="G5a-qD-iKU"/>
             </connections>
             <point key="canvasLocation" x="-301.52671755725191" y="-61.267605633802823"/>

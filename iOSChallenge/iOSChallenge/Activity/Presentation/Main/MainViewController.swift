@@ -41,7 +41,8 @@ final class MainViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction private func onTapClose(_ sender: Any) {
-        showAlert(title: nil, message: "No implementation")
+        showAlert(title: nil, message: "We are restarting the questionnaire ☺️")
+        restart()
     }
     
     @IBAction private func onTapBack(_ sender: Any) {

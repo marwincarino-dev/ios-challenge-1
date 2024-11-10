@@ -21,10 +21,10 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OGr-Xl-Pes">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="553"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="613"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="QKp-Q3-ZzN">
-                                                <rect key="frame" x="16" y="0.0" width="361" height="553"/>
+                                                <rect key="frame" x="16" y="0.0" width="361" height="613"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LLs-nt-QY1">
                                                         <rect key="frame" x="0.0" y="0.0" width="361" height="16"/>
@@ -53,17 +53,24 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3h-kX-n54" userLabel="Spacer">
-                                                        <rect key="frame" x="0.0" y="70" width="361" height="0.0"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" id="Gkc-KJ-fXS"/>
-                                                        </constraints>
-                                                    </view>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UOF-wF-Xaf">
-                                                        <rect key="frame" x="0.0" y="82" width="361" height="471"/>
+                                                        <rect key="frame" x="0.0" y="70" width="361" height="200"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="200" id="cAk-S5-Bdx"/>
+                                                        </constraints>
                                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NAb-ob-Vm6">
+                                                            <size key="itemSize" width="128" height="128"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells/>
+                                                    </collectionView>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H74-21-7Fr">
+                                                        <rect key="frame" x="0.0" y="282" width="361" height="331"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="f9e-8z-jEO">
                                                             <size key="itemSize" width="128" height="128"/>
                                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -83,11 +90,11 @@
                                         </constraints>
                                     </view>
                                     <view hidden="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9fR-h7-Qfy" userLabel="Spacer">
-                                        <rect key="frame" x="0.0" y="559" width="393" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="619" width="393" height="0.0"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="FJk-S0-Vs7">
-                                        <rect key="frame" x="0.0" y="565" width="393" height="194"/>
+                                        <rect key="frame" x="0.0" y="625" width="393" height="134"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="axb-xL-uNE">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="68"/>
@@ -116,25 +123,8 @@
                                                     <constraint firstItem="O2s-zj-K2K" firstAttribute="leading" secondItem="axb-xL-uNE" secondAttribute="leading" id="lpd-8G-Apl"/>
                                                 </constraints>
                                             </stackView>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H74-21-7Fr">
-                                                <rect key="frame" x="16" y="80" width="361" height="48"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="48" id="EiE-Qr-1TG"/>
-                                                </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="f9e-8z-jEO">
-                                                    <size key="itemSize" width="128" height="128"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells/>
-                                            </collectionView>
-                                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="o7U-PY-6tQ">
-                                                <rect key="frame" x="16" y="134" width="361" height="0.0"/>
-                                            </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ihe-2C-5uY">
-                                                <rect key="frame" x="16" y="140" width="361" height="54"/>
+                                                <rect key="frame" x="16" y="80" width="361" height="54"/>
                                                 <color key="backgroundColor" name="Purple 5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="54" id="t2s-71-B5N"/>
@@ -158,11 +148,7 @@
                                             <constraint firstItem="Ihe-2C-5uY" firstAttribute="leading" secondItem="FJk-S0-Vs7" secondAttribute="leading" constant="16" id="080-5O-K3r"/>
                                             <constraint firstAttribute="trailing" secondItem="Ihe-2C-5uY" secondAttribute="trailing" constant="16" id="BIF-4l-kYM"/>
                                             <constraint firstItem="axb-xL-uNE" firstAttribute="leading" secondItem="FJk-S0-Vs7" secondAttribute="leading" id="Edp-Dn-hjY"/>
-                                            <constraint firstItem="H74-21-7Fr" firstAttribute="leading" secondItem="FJk-S0-Vs7" secondAttribute="leading" constant="16" id="HLi-Xf-9QW"/>
-                                            <constraint firstAttribute="trailing" secondItem="o7U-PY-6tQ" secondAttribute="trailing" constant="16" id="d8m-fq-50f"/>
-                                            <constraint firstAttribute="trailing" secondItem="H74-21-7Fr" secondAttribute="trailing" constant="16" id="dhP-G0-sT2"/>
                                             <constraint firstAttribute="trailing" secondItem="axb-xL-uNE" secondAttribute="trailing" id="mp6-AC-oVg"/>
-                                            <constraint firstItem="o7U-PY-6tQ" firstAttribute="leading" secondItem="FJk-S0-Vs7" secondAttribute="leading" constant="16" id="qm5-xk-R0Z"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -183,9 +169,8 @@
                     </view>
                     <size key="freeformSize" width="393" height="852"/>
                     <connections>
-                        <outlet property="answersStackView" destination="o7U-PY-6tQ" id="qnK-vq-dgp"/>
+                        <outlet property="answersCollectionView" destination="H74-21-7Fr" id="n05-Va-vIC"/>
                         <outlet property="bodyCollectionView" destination="UOF-wF-Xaf" id="S30-j7-T7n"/>
-                        <outlet property="collectionView" destination="H74-21-7Fr" id="n05-Va-vIC"/>
                         <outlet property="continueButton" destination="Ihe-2C-5uY" id="aSH-qT-L2P"/>
                         <outlet property="feedbackIndicatorView" destination="O2s-zj-K2K" id="xWx-hu-SqY"/>
                         <outlet property="feedbackLabel" destination="zsm-FX-eKG" id="TgX-mb-YaD"/>
@@ -194,7 +179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CiK-lx-WRw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4576" y="230"/>
+            <point key="canvasLocation" x="4574.8091603053435" y="229.57746478873241"/>
         </scene>
     </scenes>
     <resources>

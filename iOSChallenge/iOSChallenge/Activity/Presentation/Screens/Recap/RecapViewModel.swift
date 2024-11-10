@@ -14,7 +14,7 @@ final class RecapViewModel: ScreenViewModel {
     let answers: [Answer]
     let correctAnswer: String
     
-    private(set) var selectedAnswer: Answer?
+    private(set) var selectedAnswer: String?
     
     init(
         id: String,
@@ -25,12 +25,12 @@ final class RecapViewModel: ScreenViewModel {
     ) {
         self.id = id
         self.eyebrow = eyebrow
-        self.body = body
+        self.body = body.formatBody()
         self.answers = answers
         self.correctAnswer = correctAnswer
     }
     
-    func select(answer: Answer) {
+    func select(answer: String) {
         if selectedAnswer == answer {
             selectedAnswer = nil
         } else {
@@ -41,10 +41,14 @@ final class RecapViewModel: ScreenViewModel {
     func clearSelectedAnswer() {
         selectedAnswer = nil
     }
-    
+}
+
+extension RecapViewModel {
     var hasCorrectAnswer: Bool {
-        return selectedAnswer?.id == correctAnswer
+        return selectedAnswer == correctAnswer
     }
+    
+    var answerPlaceholder: String {  selectedAnswer ?? String.blankPlaceholder }
 }
 
 extension RecapViewModel {

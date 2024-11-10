@@ -43,12 +43,14 @@ extension CommonMainViewModel {
                         RecapViewModel.Answer(id: $0.id, text: $0.text)
                     })
                     
+                    let correctAnswer = (answers?.first(where: { $0.id == screen.correctAnswer})?.text).unwrap()
+                    
                     return RecapViewModel(
                         id: screen.id,
                         eyebrow: screen.eyebrow.unwrap(),
                         body: screen.body.unwrap(),
                         answers: answers ?? [],
-                        correctAnswer: screen.correctAnswer.unwrap()
+                        correctAnswer: correctAnswer
                     )
                 }
             }

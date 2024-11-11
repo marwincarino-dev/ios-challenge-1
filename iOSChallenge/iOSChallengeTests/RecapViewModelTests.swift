@@ -48,6 +48,19 @@ final class RecapViewModelTests: XCTestCase {
         
         XCTAssertTrue(sut.hasCorrectAnswer)
     }
+    
+    func test_emptyAnswers_returnsIncorrectAnswer() {
+        let correctAnswer = "correct answer"
+        
+        let sut = makeSUT(
+            correctAnswer: correctAnswer,
+            answers: []
+        )
+        
+        sut.select(answer: correctAnswer)
+        
+        XCTAssertFalse(sut.hasCorrectAnswer)
+    }
 }
 
 private extension RecapViewModelTests {

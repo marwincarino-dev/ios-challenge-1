@@ -9,8 +9,6 @@ import XCTest
 @testable import iOSChallenge
 
 final class RecapViewModelTests: XCTestCase {
-
-    
     func test_selectWrongAnswer_returnsIncorrectAnswer() {
         let correctAnswer = "correct answer"
         let wrongAnswer1 = "wrong answer 1"
@@ -58,6 +56,26 @@ final class RecapViewModelTests: XCTestCase {
         )
         
         sut.select(answer: correctAnswer)
+        
+        XCTAssertFalse(sut.hasCorrectAnswer)
+    }
+    
+    func test_clearedAnswer_returnsIncorrectAnser() {
+        let correctAnswer = "correct answer"
+        let wrongAnswer1 = "wrong answer 1"
+        let wrongAnswer2 = "wrong answer 2"
+        
+        let sut = makeSUT(
+            correctAnswer: correctAnswer,
+            answers: [
+                wrongAnswer1,
+                wrongAnswer2,
+                correctAnswer
+            ]
+        )
+        
+        sut.select(answer: correctAnswer)
+        sut.clearSelectedAnswer()
         
         XCTAssertFalse(sut.hasCorrectAnswer)
     }

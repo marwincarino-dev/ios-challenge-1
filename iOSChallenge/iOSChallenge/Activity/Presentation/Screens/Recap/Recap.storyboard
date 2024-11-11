@@ -172,6 +172,7 @@
                         <outlet property="answersCollectionView" destination="H74-21-7Fr" id="n05-Va-vIC"/>
                         <outlet property="bodyCollectionView" destination="UOF-wF-Xaf" id="S30-j7-T7n"/>
                         <outlet property="continueButton" destination="Ihe-2C-5uY" id="aSH-qT-L2P"/>
+                        <outlet property="eyebrowLabel" destination="cgI-Qw-ffi" id="ydh-2t-XP6"/>
                         <outlet property="feedbackIndicatorView" destination="O2s-zj-K2K" id="xWx-hu-SqY"/>
                         <outlet property="feedbackLabel" destination="zsm-FX-eKG" id="TgX-mb-YaD"/>
                         <outlet property="feedbackStackView" destination="axb-xL-uNE" id="BN6-W6-BHp"/>

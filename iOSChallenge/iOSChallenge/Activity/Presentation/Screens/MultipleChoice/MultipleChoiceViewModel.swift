@@ -28,6 +28,8 @@ final class MultipleChoiceViewModel: ScreenViewModel {
     }
     
     func select(choice: Choice) {
+        guard canSelectChoices else { return }
+        
         if selectedChoices.contains(choice) {
             selectedChoices.remove(choice)
         } else {
@@ -37,6 +39,16 @@ final class MultipleChoiceViewModel: ScreenViewModel {
     
     func clearSelectedChoices() {
         selectedChoices.removeAll()
+    }
+}
+
+private extension MultipleChoiceViewModel {
+    var canSelectChoices: Bool {
+        if allowsMultipleChoices {
+            return true
+        } else {
+            return selectedChoices.isEmpty
+        }
     }
 }
 

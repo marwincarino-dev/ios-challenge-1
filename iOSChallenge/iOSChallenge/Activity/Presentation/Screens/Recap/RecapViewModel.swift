@@ -16,6 +16,10 @@ final class RecapViewModel: ScreenViewModel {
     
     private(set) var selectedAnswer: String?
     
+    private lazy var answerTexts: [String] = {
+        answers.map({ $0.text })
+    }()
+    
     init(
         id: String,
         eyebrow: String,
@@ -45,6 +49,9 @@ final class RecapViewModel: ScreenViewModel {
 
 extension RecapViewModel {
     var hasCorrectAnswer: Bool {
+        guard let selectedAnswer,
+              answerTexts.contains(selectedAnswer) else { return false }
+        
         return selectedAnswer == correctAnswer
     }
     

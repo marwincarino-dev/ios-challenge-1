@@ -19,3 +19,7 @@ func anyData(_ data: [[String: Any]]) -> Data {
     let json = ["data": data]
     return try! JSONSerialization.data(withJSONObject: json)
 }
+
+func anyID() -> String {
+    UUID().uuidString
+}

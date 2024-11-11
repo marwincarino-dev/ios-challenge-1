@@ -10,12 +10,13 @@ import UIKit
 final class RecapViewController: UIViewController {
     // MARK: - IBOutlets
     
-    @IBOutlet var bodyCollectionView: UICollectionView!
-    @IBOutlet var feedbackStackView: UIStackView!
-    @IBOutlet var feedbackIndicatorView: UIView!
-    @IBOutlet var feedbackLabel: UILabel!
-    @IBOutlet var answersCollectionView: UICollectionView!
-    @IBOutlet var continueButton: UIButton!
+    @IBOutlet private var eyebrowLabel: UILabel!
+    @IBOutlet private var bodyCollectionView: UICollectionView!
+    @IBOutlet private var feedbackStackView: UIStackView!
+    @IBOutlet private var feedbackIndicatorView: UIView!
+    @IBOutlet private var feedbackLabel: UILabel!
+    @IBOutlet private var answersCollectionView: UICollectionView!
+    @IBOutlet private var continueButton: UIButton!
    
     // MARK: - Properties
     
@@ -44,6 +45,10 @@ private extension RecapViewController {
         setupAnswersCollectionView()
         updateFeedbackView()
         setupActivityIndicator()
+    }
+    
+    func setupRecap() {
+        eyebrowLabel.text = viewModel.eyebrow
     }
     
     func setupBodyCollectionView() {
